@@ -99,45 +99,108 @@ select * from orders o join items i on o.item_id=i.item_id;
 
 2.Revenue By Items
 
-select oi.item_id,i.item_name,sum(oi.quantity*oi.price) as Total_Revenue from order_items oi join items i on oi.item_id=i.item_id GROUP BY oi.item_id,i.item_name;
+select oi.item_id,
+    i.item_name,
+    sum(oi.quantity*oi.price) as Total_Revenue 
+from order_items oi 
+join items i on oi.item_id=i.item_id 
+GROUP BY oi.item_id,i.item_name;
 
 
 3.Revenue by Payment Method
 
-select p.payment_id,p.payment_method,sum(o.quantity*o.price) as Total_Revenue from payments p join order_items o on p.order_id=o.order_id GROUP BY p.payment_id,p.payment_method;
+select p.payment_id,
+    p.payment_method,
+    sum(o.quantity*o.price) as Total_Revenue 
+from payments p 
+join order_items o on p.order_id=o.order_id 
+GROUP BY p.payment_id,p.payment_method;
 
 4.Total Revenue by Date 
 
-select date(p.paid_at) as Date,sum(o.quantity*o.price) as Total_Revenue from payments p join order_items o on p.order_id=o.order_id GROUP BY p.paid_at;
+select date(p.paid_at) as Date,
+    sum(o.quantity*o.price) as Total_Revenue 
+from payments p 
+join order_items o on p.order_id=o.order_id 
+GROUP BY p.paid_at;
 
 5.Total Revenue by DATE
 
-select o.user_id as user_id,COUNT(o.order_id) as counts,SUM(oi.quantity*oi.price) as Total_Revenue from orders o join order_items oi on o.order_id=oi.order_id GROUP BY o.user_id,o.order_id;
+select o.user_id,
+    COUNT(o.order_id) as counts,
+    SUM(oi.quantity*oi.price) as Total_Revenue 
+from orders o 
+join order_items oi on o.order_id=oi.order_id 
+GROUP BY o.user_id,o.order_id;
 
 6.Items Ordered by category
 
-select c.category_id,c.category_name,i.item_id,count(o.quantity) as counts from categories c join items i on c.category_id=i.category_id join orders o on i.item_id=o.item_id GROUP BY c.category_id,c.category_name,i.item_id;
+select c.category_id,
+    c.category_name,
+    i.item_id,count(o.quantity) as counts 
+from categories c 
+join items i on c.category_id=i.category_id 
+join orders o on i.item_id=o.item_id 
+GROUP BY c.category_id,c.category_name,i.item_id;
 
 7.Orders by Payment Status 
 
-select p.payment_status , count(p.order_id) as counts from payments p group by p.payment_status;
+select p.payment_status, 
+    count(p.order_id) as counts 
+from payments p 
+group by p.payment_status;
 
 8.Revenue by Category
 
-select i.item_id,i.item_name,i.category_id,sum(i.price) as total_price from orders o join items i on o.item_id=i.item_id GROUP BY i.category_id,i.item_id,i.item_name;
+select i.item_id,
+    i.item_name,
+    i.category_id,
+    sum(i.price) as total_price 
+from orders o 
+join items i on o.item_id=i.item_id 
+GROUP BY i.category_id,i.item_id,i.item_name;
 
 9.Customer Details with Orders
 
-select c.user_id,c.first_name,c.last_name,c.phone_number,c.email,o.order_id,o.item_id,oi.quantity,oi.price from customers c join orders o on c.user_id=o.user_id join order_items oi on o.order_id=oi.order_id;
+select c.user_id,
+    c.first_name,
+    c.last_name,
+    c.phone_number,
+    c.email,
+    o.order_id,
+    o.item_id,
+    oi.quantity,
+    oi.price 
+from customers c 
+join orders o on c.user_id=o.user_id 
+join order_items oi on o.order_id=oi.order_id;
 
 10.Revenue by Customer
 
-select c.user_id,c.first_name,oi.item_id,i.item_name,sum(oi.price*oi.quantity) as Total_Revenu from customers c join orders o on c.user_id=o.user_id join order_items oi on o.order_id=oi.order_id join items i on oi.item_id=i.item_id GROUP BY c.user_id,c.first_name,oi.item_id,i.item_name;
+select c.user_id,
+    c.first_name,
+    oi.item_id,
+    i.item_name,
+    sum(oi.price*oi.quantity) as Total_Revenu 
+from customers c 
+join orders o on c.user_id=o.user_id 
+join order_items oi on o.order_id=oi.order_id 
+join items i on oi.item_id=i.item_id 
+GROUP BY c.user_id,c.first_name,oi.item_id,i.item_name;
 
 11.Revenue with Most Orders
 
-select c.first_name,c.last_name,count(o.order_id) as total_orders from customers c join orders o on c.user_id=o.user_id GROUP BY c.first_name,c.last_name;
+select c.first_name,
+    c.last_name,count(o.order_id) as total_orders 
+from customers c 
+join orders o on c.user_id=o.user_id 
+GROUP BY c.first_name,c.last_name;
 
 12.Items Purchased in Specific order
 
-select o.user_id,o.order_id,o.item_id,i.item_name from orders o join items i on o.item_id=i.item_id where user_id=1;
+select o.user_id,
+    o.order_id,
+    o.item_id,
+    i.item_name 
+from orders o 
+join items i on o.item_id=i.item_id where user_id=1;
