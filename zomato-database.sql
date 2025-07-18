@@ -204,3 +204,5 @@ select o.user_id,
     i.item_name 
 from orders o 
 join items i on o.item_id=i.item_id where user_id=1;
+
+Select * from orders;
