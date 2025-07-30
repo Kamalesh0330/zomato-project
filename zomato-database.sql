@@ -88,10 +88,10 @@ INSERT INTO customers (user_id, first_name, last_name, phone_number, email) VALU
 (2, 'Jane', 'Smith', '987-654-3210', 'jane.smith@example.com'),
 (3, 'Alice', 'Johnson', '111-222-3333', 'alice.johnson@example.com'),
 (4, 'Bob', 'Brown', '444-555-6666', 'bob.brown@example.com'),
-(5, 'Gowtham', 'Kumar', '777-888-9999', 'gowtham.kumar@example.com');
+(5, 'Gowtham', 'Kumar', '777-888-9999', 'gowtham.kumar@example.com')
 
 select * from orders;
-
+select * from customers;
 ******************************** ETL ********************************
 1.Total Revenue from All orders
 
